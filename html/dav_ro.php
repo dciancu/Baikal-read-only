@@ -119,7 +119,7 @@ $server = new CustomServer(
     PROJECT_BASEURI . 'dav_ro.php/'
 );
 $davServer = $server->getDavServer();
-$davServer->on('method:DELETE', fn () => throw new CustomForbidden204, 50);
+$davServer->on('beforeUnbind', fn () => throw new CustomForbidden204, 50);
 $davServer->on('beforeCreateFile', fn () => throw new CustomForbidden201, 50);
 $davServer->on('beforeWriteContent', fn () => throw new CustomForbidden204, 50);
 $server->start();
